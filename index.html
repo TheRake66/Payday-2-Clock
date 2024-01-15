@@ -194,7 +194,7 @@
         const effectElement = document.getElementById('effect');
         const estimatedElement = document.getElementById('estimated');
 
-        let clockPaused = false;
+        let mainClockThread = null;
         let defaultLanguage = 'english';
         let currentLanguage = null;
         let languagePack = {
@@ -265,45 +265,68 @@
 
 
 
+        setFullScreen();
         initLanguage();
         addSwitchOnClick();
         setNormalMode();
-        waitDomToPlay();
-        mainClockThread();
+        playAudioEffect();
+        runMainThread();
 
 
 
-        function mainClockThread() {
+        function runMainThread() {
             refreshClock();
-            setInterval(() => {
-                if (!clockPaused) {
-                    refreshClock();
+            mainClockThread = setInterval(() => refreshClock(), 1000);
+        }
+
+        function stopMainThread() {
+            clearInterval(mainClockThread);
+            mainClockThread = null;
+        }
+
+        function isMainThreadRunning() {
+            return mainClockThread !== null;
+        }
+
+        async function playAudioEffect() {
+            while (true) {
+                try {
+                    effectElement.play().catch(_ => {});
+                    break;
+                } catch {
+                    await getSleepPromise();
                 }
-            }, 1000);
-        }        
+            }
+        }
+
+        async function setFullScreen() {
+            let element = document.documentElement;
+            let requestMethod = 
+                element.requestFullscreen || 
+                element.mozRequestFullScreen || 
+                element.webkitRequestFullscreen || 
+                element.msRequestFullscreen;
+            while (true) {
+                requestMethod?.call(element).catch(_ => {});
+                if (document.fullscreenElement) {
+                    console.clear();
+                    break;
+                }
+                await getSleepPromise();
+            }
+        }
         
         function addSwitchOnClick() {
             switchElement.onclick = () => {
-                switchElement.className = "";
-                if (clockPaused) {
-                    setNormalMode();
-                    clockPaused = false;
-                } else {
+                if (isMainThreadRunning()) {
                     setJammedMode();
-                    clockPaused = true;
+                    stopMainThread();
+                } else {
+                    setNormalMode();
+                    runMainThread();
                 }
-                waitDomToPlay();
+                playAudioEffect();
             };
-        }
-
-        async function waitDomToPlay() {
-            let audioPlayed = false;
-            do {
-                effectElement.play().then(_ => audioPlayed = true );
-                if (!audioPlayed) {
-                    await getSleepPromise();
-                }
-            } while (!audioPlayed)
         }
 
         function initLanguage() {
@@ -317,14 +340,14 @@
         }
 
         function setNormalMode() {
-            switchElement.classList.add('normal');
+            switchElement.className = 'normal';
             titleElement.innerText = currentLanguage.titleNormal;
             clockElement.innerText = '...';
             effectElement.src = "./assets/sound/drill.mp3";
         }
         
         function setJammedMode() {
-            switchElement.classList.add('jammed');
+            switchElement.className = 'jammed';
             titleElement.innerText = '// ' + currentLanguage.titleJammed + ' //';
             clockElement.innerText = '// ' + currentLanguage.errorJammed + ' //';
             effectElement.src = "./assets/sound/jammed.mp3";
@@ -346,9 +369,10 @@
             let currentMinutes = currentDate.getMinutes();
             let currentSeconds = currentDate.getSeconds();
 
-            var dateFormat = currentLanguage.dayFirst ?
-                padToTwo(currentDay) + '/' + padToTwo(currentMonth) + '/' + currentYear :
-                padToTwo(currentMonth) + '/' + padToTwo(currentDay) + '/' + currentYear;
+            var dateFormat = (currentLanguage.dayFirst ?
+                padToTwo(currentDay) + '/' + padToTwo(currentMonth) :
+                padToTwo(currentMonth) + '/' + padToTwo(currentDay))
+                + '/' + currentYear;
 
             var timeFormat = padToTwo(currentHours) + ':' + padToTwo(currentMinutes) + ':' + padToTwo(currentSeconds);
 
@@ -373,8 +397,8 @@
         function padToTwo(number) {
             return number.toString().padStart(2, '0');
         }
-
-        function getSleepPromise(time = 500) {
+        
+        function getSleepPromise(time = 100) {
             return new Promise(r => setTimeout(r, time));
         }
 
