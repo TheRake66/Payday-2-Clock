@@ -203,7 +203,7 @@
         let languagePack = {
             french: {
                 htmlLang: 'fr-FR',
-                tabTitle: 'Payday 2 - Horloge',
+                tabTitle: 'Horloge',
                 titleNormal: 'Journée en cours',
                 titleJammed: 'Journée coincée',
                 estimatedTime: 'Temps actuel estimé',
@@ -212,7 +212,7 @@
             },
             english: {
                 htmlLang: 'en-EN',
-                tabTitle: 'Payday 2 - Clock',
+                tabTitle: 'Clock',
                 titleNormal: 'Day in progress',
                 titleJammed: 'Day jammed',
                 estimatedTime: 'Estimated current time',
@@ -221,7 +221,7 @@
             },
             spanish: {
                 htmlLang: 'sp-SP',
-                tabTitle: 'Payday 2 - Reloj',
+                tabTitle: 'Reloj',
                 titleNormal: 'Día en progreso',
                 titleJammed: 'Día atascado',
                 estimatedTime: 'Hora actual estimada',
@@ -230,7 +230,7 @@
             },
             german: {
                 htmlLang: 'de-DE',
-                tabTitle: 'Payday 2 - Uhr',
+                tabTitle: 'Uhr',
                 titleNormal: 'Tag im Gange',
                 titleJammed: 'Der Tag ist blockiert',
                 estimatedTime: 'Geschätzte aktuelle Zeit',
@@ -239,7 +239,7 @@
             },
             italian: {
                 htmlLang: 'it-IT',
-                tabTitle: 'Payday 2 - Orologio',
+                tabTitle: 'Orologio',
                 titleNormal: 'Giornata in corso',
                 titleJammed: 'Giornata piena',
                 estimatedTime: 'Ora corrente stimata',
@@ -248,7 +248,7 @@
             },
             japanese: {
                 htmlLang: 'jp-JP',
-                tabTitle: 'Payday 2 - 時計',
+                tabTitle: '時計',
                 titleNormal: '進行中の日',
                 titleJammed: '詰まった日',
                 estimatedTime: '推定現在時刻',
@@ -257,7 +257,7 @@
             },
             russian: {
                 htmlLang: 'ru-RU',
-                tabTitle: 'Payday 2 - Часы',
+                tabTitle: 'Часы',
                 titleNormal: 'День в разгаре',
                 titleJammed: 'День застрял',
                 estimatedTime: 'Расчетное текущее время',
@@ -337,7 +337,7 @@
             let languageCode = urlParameters.get('language') ?? defaultLanguage;
             currentLanguage = languagePack[languageCode];            
 
-            document.title = currentLanguage.tabTitle;
+            document.title = 'Payday 2 - ' + currentLanguage.tabTitle;
             document.documentElement.lang = currentLanguage.htmlLang;
             estimated.innerText = currentLanguage.estimatedTime;
         }
