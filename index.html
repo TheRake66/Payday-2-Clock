@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="./assets/img/icon.ico"/>
+        <title></title>
+    </head>
+
+    <body id="switch">
+
+        <audio id="effect" preload="auto" loop></audio>
+        
+        <header>
+            <h1>OVKL ToolSys 2.0</h1>
+            <a href="?language=french">
+                <img src="./assets/img/fr.png" alt="French">
+            </a>
+            <a href="?language=english">
+                <img src="./assets/img/gb.png" alt="English">
+            </a>
+            <a href="?language=spanish">
+                <img src="./assets/img/es.png" alt="Spanish">
+            </a>
+            <a href="?language=german">
+                <img src="./assets/img/de.png" alt="German">
+            </a>
+            <a href="?language=italian">
+                <img src="./assets/img/it.png" alt="Italian">
+            </a>
+            <a href="?language=japanese">
+                <img src="./assets/img/jp.png" alt="Japanese">
+            </a>
+            <a href="?language=russian">
+                <img src="./assets/img/ru.png" alt="Russian">
+            </a>
+        </header>
+
+        <main>
+            <h2 id="title"></h2>
+            <progress id="percent" max="100"></progress>
+            <p id="estimated"></p>
+            <span id="clock"></span>
+        </main>
+
+    </body>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        @font-face {
+            font-family: 'RobotoCondensed-Regular';
+            src: url('./assets/font/Roboto_Condensed/static/RobotoCondensed-Regular.ttf') format('truetype');
+        }
+        
+        @font-face {
+            font-family: 'Roboto-Medium';
+            src: url('./assets/font/Roboto/Roboto-Medium.ttf') format('truetype');
+        }
+
+        :root {
+
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: var(--top-background-color);
+            padding: 1vh 1.5vh;
+            display: flex;
+            align-items: center;
+        }
+
+        h1 {
+            color: var(--top-fore-color);
+            font-size: 5vh;
+            font-weight: 400;
+            font-family: 'Roboto-Medium';
+            margin-right: auto;
+        }
+
+        a {
+            display: flex;
+            text-decoration: none;
+        }
+
+        header:hover img {
+            display: unset;
+        }
+
+        img {
+            height: 4vh;
+            margin-left: 2vh;
+            display: none;
+        }
+
+        main {
+            background-color: var(--main-background-color);
+            padding: 7vh;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h2 {
+            font-size: 12vh;
+        }
+
+        progress {
+            margin: 7vh 0;
+            width: 100%;
+            height: 16vh;
+            -webkit-appearance: none;
+        }
+        
+        progress::-webkit-progress-bar {
+            background-color: var(--progress-background-color);
+            padding: 2vh;
+        }
+
+        progress::-webkit-progress-value {
+            background-color: var(--progress-value-color);
+        }
+
+        p {
+            font-size: 8vh;
+        }
+
+        span {
+            margin-top: 2vh;
+            font-size: 10vh;
+        }
+
+        h2, p, span {
+            text-transform: uppercase;
+            color: var(--main-fore-color);
+            font-weight: 400;
+            font-family: 'RobotoCondensed-Regular';
+        }
+
+        .jammed {
+            --top-background-color: #B40304;
+            --top-fore-color: #000000;
+
+            --main-background-color: #450505;
+            --main-fore-color: #7D0404;
+            
+            --progress-background-color: #680606;
+            --progress-value-color: #A50504;
+
+            animation: blink-animation .5s ease-in-out infinite alternate;
+        }
+
+        .normal {
+            --top-background-color: #A9A9A9;
+            --top-fore-color: #000000;
+
+            --main-background-color: #39638D;
+            --main-fore-color: #C6B123;
+            
+            --progress-background-color: #2B5279;
+            --progress-value-color: #C6B123;
+        }
+
+        @keyframes blink-animation {
+            to {
+                filter: saturate(200%);
+            }
+        }
+
+    </style>
+
+    <script>
+
+        const titleElement = document.getElementById('title');
+        const percentElement = document.getElementById('percent');
+        const clockElement = document.getElementById('clock');
+        const switchElement = document.getElementById('switch');
+        const effectElement = document.getElementById('effect');
+        const estimatedElement = document.getElementById('estimated');
+
+        let clockPaused = false;
+        let defaultLanguage = 'english';
+        let currentLanguage = null;
+        let languagePack = {
+            french: {
+                htmlLang: 'fr-FR',
+                tabTitle: 'Payday 2 - Horloge',
+                titleNormal: 'Journée en cours',
+                titleJammed: 'Journée coincée',
+                estimatedTime: 'Temps actuel estimé',
+                errorJammed: 'Erreur',
+                dayFirst: true
+            },
+            english: {
+                htmlLang: 'en-EN',
+                tabTitle: 'Payday 2 - Clock',
+                titleNormal: 'Day in progress',
+                titleJammed: 'Day jammed',
+                estimatedTime: 'Estimated current time',
+                errorJammed: 'Error',
+                dayFirst: false
+            },
+            spanish: {
+                htmlLang: 'sp-SP',
+                tabTitle: 'Payday 2 - Reloj',
+                titleNormal: 'Día en progreso',
+                titleJammed: 'Día atascado',
+                estimatedTime: 'Hora actual estimada',
+                errorJammed: 'Error',
+                dayFirst: true
+            },
+            german: {
+                htmlLang: 'de-DE',
+                tabTitle: 'Payday 2 - Uhr',
+                titleNormal: 'Tag im Gange',
+                titleJammed: 'Der Tag ist blockiert',
+                estimatedTime: 'Geschätzte aktuelle Zeit',
+                errorJammed: 'Fehler',
+                dayFirst: true
+            },
+            italian: {
+                htmlLang: 'it-IT',
+                tabTitle: 'Payday 2 - Orologio',
+                titleNormal: 'Giornata in corso',
+                titleJammed: 'Giornata piena',
+                estimatedTime: 'Ora corrente stimata',
+                errorJammed: 'Errore',
+                dayFirst: true
+            },
+            japanese: {
+                htmlLang: 'jp-JP',
+                tabTitle: 'Payday 2 - 時計',
+                titleNormal: '進行中の日',
+                titleJammed: '詰まった日',
+                estimatedTime: '推定現在時刻',
+                errorJammed: 'エラー',
+                dayFirst: false
+            },
+            russian: {
+                htmlLang: 'ru-RU',
+                tabTitle: 'Payday 2 - Часы',
+                titleNormal: 'День в разгаре',
+                titleJammed: 'День застрял',
+                estimatedTime: 'Расчетное текущее время',
+                errorJammed: 'Ошибка',
+                dayFirst: false
+            }
+        };
+
+
+
+        initLanguage();
+        addSwitchOnClick();
+        setNormalMode();
+        waitDomToPlay();
+        mainClockThread();
+
+
+
+        function mainClockThread() {
+            refreshClock();
+            setInterval(() => {
+                if (!clockPaused) {
+                    refreshClock();
+                }
+            }, 1000);
+        }        
+        
+        function addSwitchOnClick() {
+            switchElement.onclick = () => {
+                switchElement.className = "";
+                if (clockPaused) {
+                    setNormalMode();
+                    clockPaused = false;
+                } else {
+                    setJammedMode();
+                    clockPaused = true;
+                }
+                waitDomToPlay();
+            };
+        }
+
+        async function waitDomToPlay() {
+            let audioPlayed = false;
+            do {
+                effectElement.play().then(_ => audioPlayed = true );
+                if (!audioPlayed) {
+                    await getSleepPromise();
+                }
+            } while (!audioPlayed)
+        }
+
+        function initLanguage() {
+            let urlParameters = new URLSearchParams(window.location.search);
+            let languageCode = urlParameters.get('language') ?? defaultLanguage;
+            currentLanguage = languagePack[languageCode];            
+
+            document.title = currentLanguage.tabTitle;
+            document.documentElement.lang = currentLanguage.htmlLang;
+            estimated.innerText = currentLanguage.estimatedTime;
+        }
+
+        function setNormalMode() {
+            switchElement.classList.add('normal');
+            titleElement.innerText = currentLanguage.titleNormal;
+            clockElement.innerText = '...';
+            effectElement.src = "./assets/sound/drill.mp3";
+        }
+        
+        function setJammedMode() {
+            switchElement.classList.add('jammed');
+            titleElement.innerText = '// ' + currentLanguage.titleJammed + ' //';
+            clockElement.innerText = '// ' + currentLanguage.errorJammed + ' //';
+            effectElement.src = "./assets/sound/jammed.mp3";
+        }
+
+        function refreshClock() {
+            percentElement.value = getDayPercent();
+            clockElement.innerText = getClockFormat();
+        }
+
+        function getClockFormat() {
+            let currentDate = new Date();
+
+            let currentDay = currentDate.getDate();
+            let currentMonth = currentDate.getMonth() + 1;
+            let currentYear = currentDate.getFullYear();
+
+            let currentHours = currentDate.getHours();
+            let currentMinutes = currentDate.getMinutes();
+            let currentSeconds = currentDate.getSeconds();
+
+            var dateFormat = currentLanguage.dayFirst ?
+                padToTwo(currentDay) + '/' + padToTwo(currentMonth) + '/' + currentYear :
+                padToTwo(currentMonth) + '/' + padToTwo(currentDay) + '/' + currentYear;
+
+            var timeFormat = padToTwo(currentHours) + ':' + padToTwo(currentMinutes) + ':' + padToTwo(currentSeconds);
+
+            return dateFormat + ' - ' + timeFormat;
+        }
+
+        function getDayPercent() {
+            let currentDate = new Date();
+
+            let currentHours = currentDate.getHours();
+            let currentMinutes = currentDate.getMinutes();
+            let currentSeconds = currentDate.getSeconds();
+
+            let currentStamp = currentHours * 3600 + currentMinutes * 60 + currentSeconds;
+            let maxDayStamp = 24 * 60 * 60;
+
+            let percent = (currentStamp / maxDayStamp) * 100;
+
+            return percent.toFixed(2);
+        }
+
+        function padToTwo(number) {
+            return number.toString().padStart(2, '0');
+        }
+
+        function getSleepPromise(time = 500) {
+            return new Promise(r => setTimeout(r, time));
+        }
+
+    </script>
+    
+</html>
