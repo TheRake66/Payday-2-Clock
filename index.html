@@ -87,6 +87,10 @@
             align-items: center;
         }
 
+        header:hover img {
+            display: unset;
+        }
+
         h1 {
             color: var(--top-fore-color);
             font-size: 5vh;
@@ -98,10 +102,6 @@
         a {
             display: flex;
             text-decoration: none;
-        }
-
-        header:hover img {
-            display: unset;
         }
 
         img {
@@ -150,8 +150,8 @@
         }
 
         h2, p, span {
-            text-transform: uppercase;
             color: var(--main-fore-color);
+            text-transform: uppercase;
             font-weight: 400;
             font-family: 'RobotoCondensed-Regular';
         }
@@ -190,12 +190,12 @@
 
     <script>
 
-        const titleElement = document.getElementById('title');
-        const percentElement = document.getElementById('percent');
-        const clockElement = document.getElementById('clock');
         const switchElement = document.getElementById('switch');
         const effectElement = document.getElementById('effect');
+        const titleElement = document.getElementById('title');
+        const percentElement = document.getElementById('percent');
         const estimatedElement = document.getElementById('estimated');
+        const clockElement = document.getElementById('clock');
 
         let mainClockThread = null;
         let defaultLanguage = 'english';
@@ -270,9 +270,9 @@
 
         setFullScreen();
         initLanguage();
-        addSwitchOnClick();
         setNormalMode();
         playAudioEffect();
+        addSwitchOnClick();
         runMainThread();
 
 
