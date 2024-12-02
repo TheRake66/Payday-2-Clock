@@ -122,6 +122,7 @@
 
         h2 {
             font-size: 10vh;
+            animation: working-animation .3s ease-in-out infinite alternate;
         }
 
         progress {
@@ -133,7 +134,7 @@
         
         progress::-webkit-progress-bar {
             background-color: var(--progress-background-color);
-            padding: 1vh;
+            padding: 1.25vh;
         }
 
         progress::-webkit-progress-value {
@@ -166,7 +167,11 @@
             --progress-background-color: #680606;
             --progress-value-color: #A50504;
 
-            animation: blink-animation .5s ease-in-out infinite alternate;
+            animation: jammed-animation .5s ease-in-out infinite alternate;
+        }
+
+        .jammed h2 {
+            animation: none;
         }
 
         .normal {
@@ -180,7 +185,13 @@
             --progress-value-color: #C6B123;
         }
 
-        @keyframes blink-animation {
+        @keyframes working-animation {
+            to {
+                filter: opacity(.3);
+            }
+        }
+
+        @keyframes jammed-animation {
             to {
                 filter: saturate(200%);
             }
