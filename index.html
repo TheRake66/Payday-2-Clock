@@ -53,16 +53,9 @@
             user-select: none;
             margin: 0;
             padding: 0;
-        }
-        
-        @font-face {
-            font-family: 'RobotoCondensed-Regular';
-            src: url('./assets/font/Roboto_Condensed/static/RobotoCondensed-Regular.ttf') format('truetype');
-        }
-        
-        @font-face {
-            font-family: 'Roboto-Medium';
-            src: url('./assets/font/Roboto/Roboto-Medium.ttf') format('truetype');
+            font-family: 'DINEngschrift';
+            font-weight: normal;
+            font-style: normal;
         }
 
         html, body {
@@ -90,8 +83,6 @@
         h1 {
             color: var(--top-fore-color);
             font-size: 5vh;
-            font-weight: 400;
-            font-family: 'Roboto-Medium';
             margin-right: auto;
         }
 
@@ -117,14 +108,13 @@
         }
 
         h2 {
-            font-size: 10vh;
-            animation: working-animation .3s ease-in-out infinite alternate;
+            font-size: 12vh;
         }
 
         progress {
             margin: 4vh 0;
             width: 100%;
-            height: 16vh;
+            height: 18vh;
             appearance: none;
             -webkit-appearance: none;
         }
@@ -150,8 +140,6 @@
         h2, p, span {
             color: var(--main-fore-color);
             text-transform: uppercase;
-            font-weight: 400;
-            font-family: 'RobotoCondensed-Regular';
         }
 
         .jammed {
@@ -180,11 +168,17 @@
             
             --progress-background-color: #2B5279;
             --progress-value-color: #C6B123;
+
+            animation: none;
+        }
+
+        .normal h2 {
+            animation: working-animation .3s ease-in-out infinite alternate;
         }
 
         @keyframes working-animation {
             to {
-                filter: opacity(.3);
+                filter: opacity(.5);
             }
         }
 
@@ -206,6 +200,11 @@
             body > * {
                 display: none;
             }
+        }
+        
+        @font-face {
+            font-family: 'DINEngschrift';
+            src: url('./assets/font/DINEngschrift.ttf') format('truetype');
         }
 
     </style>
