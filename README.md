@@ -10,11 +10,11 @@
 
  *Normal mode :*
 
- ![20241202_164449_0660](https://github.com/user-attachments/assets/86e07081-cf66-412b-8cf2-336147686a18)
+![20241203_193948_0483](https://github.com/user-attachments/assets/52318994-37a4-4f1c-bc98-1da4bc82f784)
 
  *Jammed Mode :*
 
- ![20241202_164502_0619](https://github.com/user-attachments/assets/6cb82da6-1608-40dc-ad8e-c202ec95dab6)
+![20241203_194001_0368](https://github.com/user-attachments/assets/89a0f6dc-0fc1-458c-8489-e8475739edae)
 
 You can change mode by clicking anywhere on the window.
 
