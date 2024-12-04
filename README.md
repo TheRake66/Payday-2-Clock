@@ -1,20 +1,20 @@
-![logo](https://github.com/user-attachments/assets/69e903d3-ea8e-448a-ba7d-cb51a53b4418)
+![logo](https://github.com/user-attachments/assets/b9e64fdb-c1bc-424a-8e7d-35eff9b24e02)
 
 # Payday 2 Clock
 
- Clock inspired by the screens of drills and computers in the game Payday 2.
+ Clock inspired by the screens of hackbox in the game Payday 2.
 
  Online version : https://www.payday-2-clock.com/
 
 ## Preview
 
- *Normal mode :*
+ *Hack mode :*
 
-![20241203_193948_0483](https://github.com/user-attachments/assets/52318994-37a4-4f1c-bc98-1da4bc82f784)
+![20241204_192702_0357](https://github.com/user-attachments/assets/4cc1ac8e-62db-452d-9319-db3bff98dc17)
 
- *Jammed Mode :*
+ *Error Mode :*
 
-![20241203_194001_0368](https://github.com/user-attachments/assets/89a0f6dc-0fc1-458c-8489-e8475739edae)
+![20241204_192716_0496](https://github.com/user-attachments/assets/9bdb525b-35d2-4c8c-b9e7-55ab9e836954)
 
 You can change mode by clicking anywhere on the window.
 
