@@ -10,14 +10,15 @@
 
  *Hack mode :*
 
-![20241204_192702_0357](https://github.com/user-attachments/assets/4cc1ac8e-62db-452d-9319-db3bff98dc17)
+ ![20241205_004540_0672](https://github.com/user-attachments/assets/4bc0d0f3-80d0-42fc-8934-2a6c4f905c74)
 
  *Error mode :*
 
-![20241204_192716_0496](https://github.com/user-attachments/assets/9bdb525b-35d2-4c8c-b9e7-55ab9e836954)
+ ![20241205_004555_0800](https://github.com/user-attachments/assets/60788749-7609-4f4d-b618-8ce61bb1fdd2)
 
-You can change mode by clicking anywhere on the window.
 
-You can also change language by hovering over the gray "OVKL ToolSys 2.0" bar at the top.
+ You can change mode by clicking anywhere on the window.
 
-Have fun! 😉
+ You can also change language by hovering over the gray "OVKL ToolSys 2.0" bar at the top.
+
+ Have fun! 😉
