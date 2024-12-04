@@ -4,11 +4,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="./assets/img/icon.ico"/>
-        <title></title>
+        <link rel="icon" href="./assets/img/logo.ico"/>
+        <title>...</title>
     </head>
 
-    <body id="switch">
+    <body id="screen">
 
         <audio id="effect" preload="auto" loop></audio>
         
@@ -35,9 +35,12 @@
             <a href="?language=russian">
                 <img src="./assets/img/ru.png" alt="Russian">
             </a>
+            <a href="https://github.com/TheRake66/Payday-2-Clock">
+                <img src="./assets/img/github.png" alt="GitHub">
+            </a>
         </header>
 
-        <main>
+        <main id="switch">
             <h2 id="title"></h2>
             <progress id="percent" max="100"></progress>
             <p id="estimated"></p>
@@ -142,7 +145,7 @@
             text-transform: uppercase;
         }
 
-        .jammed {
+        .error {
             --top-background-color: #B40304;
             --top-fore-color: #000000;
 
@@ -152,15 +155,15 @@
             --progress-background-color: #680606;
             --progress-value-color: #A50504;
 
-            animation: jammed-animation .5s ease-in-out infinite alternate;
+            animation: error-animation .5s ease-in-out infinite alternate;
         }
 
-        .jammed h2 {
+        .error h2 {
             animation: none;
         }
 
-        .normal {
-            --top-background-color: #A9A9A9;
+        .hack {
+            --top-background-color: #b6b6b6;
             --top-fore-color: #000000;
 
             --main-background-color: #39638D;
@@ -172,17 +175,17 @@
             animation: none;
         }
 
-        .normal h2 {
-            animation: working-animation .3s ease-in-out infinite alternate;
+        .hack h2 {
+            animation: hack-animation .3s ease-in-out infinite alternate;
         }
 
-        @keyframes working-animation {
+        @keyframes hack-animation {
             to {
                 filter: opacity(.5);
             }
         }
 
-        @keyframes jammed-animation {
+        @keyframes error-animation {
             to {
                 filter: saturate(200%);
             }
@@ -211,8 +214,9 @@
 
     <script>
 
-        const switchElement = document.getElementById('switch');
+        const screenElement = document.getElementById('screen');
         const effectElement = document.getElementById('effect');
+        const switchElement = document.getElementById('switch');
         const titleElement = document.getElementById('title');
         const percentElement = document.getElementById('percent');
         const estimatedElement = document.getElementById('estimated');
@@ -225,82 +229,77 @@
             french: {
                 htmlLang: 'fr-FR',
                 tabTitle: 'Horloge',
-                titleNormal: 'Journée en cours',
-                titleJammed: 'Journée coincée',
+                messageHack: 'Journée en cours',
+                messageError: 'Erreur',
                 estimatedTime: 'Temps actuel estimé',
-                errorJammed: 'Erreur',
                 dayFirst: true
             },
             english: {
                 htmlLang: 'en-EN',
                 tabTitle: 'Clock',
-                titleNormal: 'Day in progress',
-                titleJammed: 'Day jammed',
+                messageHack: 'Day in progress',
+                messageError: 'Error',
                 estimatedTime: 'Estimated current time',
-                errorJammed: 'Error',
                 dayFirst: false
             },
             spanish: {
                 htmlLang: 'sp-SP',
                 tabTitle: 'Reloj',
-                titleNormal: 'Día en progreso',
-                titleJammed: 'Día atascado',
+                messageHack: 'Día en progreso',
+                messageError: 'Error',
                 estimatedTime: 'Hora actual estimada',
-                errorJammed: 'Error',
                 dayFirst: true
             },
             german: {
                 htmlLang: 'de-DE',
                 tabTitle: 'Uhr',
-                titleNormal: 'Tag im Gange',
-                titleJammed: 'Der Tag ist blockiert',
+                messageHack: 'Tag im Gange',
+                messageError: 'Fehler',
                 estimatedTime: 'Geschätzte aktuelle Zeit',
-                errorJammed: 'Fehler',
                 dayFirst: true
             },
             italian: {
                 htmlLang: 'it-IT',
                 tabTitle: 'Orologio',
-                titleNormal: 'Giornata in corso',
-                titleJammed: 'Giornata piena',
+                messageHack: 'Giornata in corso',
+                messageError: 'Errore',
                 estimatedTime: 'Ora corrente stimata',
-                errorJammed: 'Errore',
                 dayFirst: true
             },
             japanese: {
                 htmlLang: 'jp-JP',
                 tabTitle: '時計',
-                titleNormal: '進行中の日',
-                titleJammed: '詰まった日',
+                messageHack: '進行中の日',
+                messageError: 'エラー',
                 estimatedTime: '推定現在時刻',
-                errorJammed: 'エラー',
                 dayFirst: false
             },
             russian: {
                 htmlLang: 'ru-RU',
                 tabTitle: 'Часы',
-                titleNormal: 'День в разгаре',
-                titleJammed: 'День застрял',
+                messageHack: 'День в разгаре',
+                messageError: 'Ошибка',
                 estimatedTime: 'Расчетное текущее время',
-                errorJammed: 'Ошибка',
                 dayFirst: false
             }
         };
 
 
 
-        setFullScreen();
         initLanguage();
-        setNormalMode();
+        setFullScreen();
         playAudioEffect();
         addSwitchOnClick();
+        setHackMode();
         runMainThread();
 
 
 
         function runMainThread() {
             refreshClock();
-            mainClockThread = setInterval(() => refreshClock(), 1000);
+            mainClockThread = setInterval(() => {
+                refreshClock();
+            }, 1000);
         }
 
         function stopMainThread() {
@@ -343,10 +342,10 @@
         function addSwitchOnClick() {
             switchElement.onclick = () => {
                 if (isMainThreadRunning()) {
-                    setJammedMode();
+                    setErrorMode();
                     stopMainThread();
                 } else {
-                    setNormalMode();
+                    setHackMode();
                     runMainThread();
                 }
                 playAudioEffect();
@@ -363,18 +362,18 @@
             estimated.innerText = currentLanguage.estimatedTime;
         }
 
-        function setNormalMode() {
-            switchElement.className = 'normal';
-            titleElement.innerText = currentLanguage.titleNormal;
+        function setHackMode() {
+            screenElement.className = 'hack';
+            titleElement.innerText = currentLanguage.messageHack + '...';
             clockElement.innerText = '...';
-            effectElement.src = "./assets/sound/drill.mp3";
+            effectElement.src = "./assets/sound/hack.mp3";
         }
         
-        function setJammedMode() {
-            switchElement.className = 'jammed';
-            titleElement.innerText = '// ' + currentLanguage.titleJammed + ' //';
-            clockElement.innerText = '// ' + currentLanguage.errorJammed + ' //';
-            effectElement.src = "./assets/sound/jammed.mp3";
+        function setErrorMode() {
+            screenElement.className = 'error';
+            titleElement.innerText = '// ' + currentLanguage.messageError + ' //';
+            clockElement.innerText = '// ' + currentLanguage.messageError + ' //';
+            effectElement.src = "./assets/sound/error.mp3";
         }
 
         function refreshClock() {
@@ -427,5 +426,5 @@
         }
 
     </script>
-    
+
 </html>
