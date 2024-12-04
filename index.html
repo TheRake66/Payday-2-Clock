@@ -29,12 +29,6 @@
             <a href="?language=italian">
                 <img src="./assets/img/it.png" alt="Italian">
             </a>
-            <a href="?language=japanese">
-                <img src="./assets/img/jp.png" alt="Japanese">
-            </a>
-            <a href="?language=russian">
-                <img src="./assets/img/ru.png" alt="Russian">
-            </a>
             <a href="https://github.com/TheRake66/Payday-2-Clock">
                 <img src="./assets/img/github.png" alt="GitHub">
             </a>
@@ -85,7 +79,7 @@
 
         h1 {
             color: var(--top-fore-color);
-            font-size: 5vh;
+            font-size: 6vh;
             margin-right: auto;
         }
 
@@ -95,14 +89,16 @@
         }
 
         img {
-            height: 4vh;
+            width: 6vh;
+            height: 6vh;
+            border-radius: 100%;
             margin-left: 2vh;
             display: none;
         }
 
         main {
             background-color: var(--main-background-color);
-            padding: 7vh;
+            padding: 8vh 16vh;
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -111,11 +107,12 @@
         }
 
         h2 {
-            font-size: 12vh;
+            font-size: 14vh;
         }
 
         progress {
             margin: 4vh 0;
+            margin-top: 2vh;
             width: 100%;
             height: 18vh;
             appearance: none;
@@ -132,12 +129,11 @@
         }
 
         p {
-            font-size: 8vh;
+            font-size: 10vh;
         }
 
         span {
-            margin-top: 2vh;
-            font-size: 12vh;
+            font-size: 14vh;
         }
 
         h2, p, span {
@@ -265,22 +261,6 @@
                 messageError: 'Errore',
                 estimatedTime: 'Ora corrente stimata',
                 dayFirst: true
-            },
-            japanese: {
-                htmlLang: 'jp-JP',
-                tabTitle: '時計',
-                messageHack: '進行中の日',
-                messageError: 'エラー',
-                estimatedTime: '推定現在時刻',
-                dayFirst: false
-            },
-            russian: {
-                htmlLang: 'ru-RU',
-                tabTitle: 'Часы',
-                messageHack: 'День в разгаре',
-                messageError: 'Ошибка',
-                estimatedTime: 'Расчетное текущее время',
-                dayFirst: false
             }
         };
 
@@ -354,8 +334,11 @@
 
         function initLanguage() {
             let urlParameters = new URLSearchParams(window.location.search);
-            let languageCode = urlParameters.get('language') ?? defaultLanguage;
-            currentLanguage = languagePack[languageCode];            
+            let languageCode = urlParameters.get('language');
+            currentLanguage = languagePack[
+                languageCode && languageCode in languagePack ?
+                languageCode : 
+                defaultLanguage];
 
             document.title = 'Payday 2 - ' + currentLanguage.tabTitle;
             document.documentElement.lang = currentLanguage.htmlLang;
