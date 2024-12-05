@@ -11,6 +11,10 @@
     <body id="screen">
 
         <audio id="effect" preload="auto" loop></audio>
+
+        <div>
+            <img src="./assets/img/rotate.png" alt="Rotate your phone">
+        </div>
         
         <header>
             <h1>OVKL ToolSys 2.0</h1>
@@ -29,7 +33,7 @@
             <a href="?language=italian">
                 <img src="./assets/img/it.png" alt="Italian">
             </a>
-            <a href="https://github.com/TheRake66/Payday-2-Clock">
+            <a href="https://github.com/TheRake66/Payday-2-Clock" target="_blank">
                 <img src="./assets/img/github.png" alt="GitHub">
             </a>
         </header>
@@ -66,6 +70,21 @@
             flex-direction: column;
         }
 
+        div {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            background-color: black;
+            display: flex;
+            visibility: hidden;
+        }
+
+        div img {
+            margin: auto;
+            width: 30vw;
+        }
+
         header {
             background-color: var(--top-background-color);
             padding: 1vh 1.5vh;
@@ -74,26 +93,32 @@
         }
 
         header:hover img {
-            display: unset;
+            opacity: 1;
         }
 
-        h1 {
+        header h1 {
             color: var(--top-fore-color);
             font-size: 6vh;
             margin-right: auto;
         }
 
-        a {
+        header a {
             display: flex;
             text-decoration: none;
         }
 
-        img {
+        header img {
             width: 6vh;
             height: 6vh;
             border-radius: 100%;
             margin-left: 2vh;
-            display: none;
+            opacity: 0;
+            transition: opacity .2s ease-in-out;
+        }
+
+        header img:hover {
+            filter: brightness(80%);
+            animation: breath-animation .5s ease-in-out infinite alternate;
         }
 
         main {
@@ -106,11 +131,11 @@
             justify-content: center;
         }
 
-        h2 {
+        main h2 {
             font-size: 13vh;
         }
 
-        progress {
+        main progress {
             margin: 4vh 0;
             margin-top: 2vh;
             width: 100%;
@@ -119,24 +144,26 @@
             -webkit-appearance: none;
         }
         
-        progress::-webkit-progress-bar {
+        main progress::-webkit-progress-bar {
             background-color: var(--progress-background-color);
             padding: 1.25vh;
         }
 
-        progress::-webkit-progress-value {
+        main progress::-webkit-progress-value {
             background-color: var(--progress-value-color);
         }
 
-        p {
+        main p {
             font-size: 9vh;
         }
 
-        span {
+        main span {
             font-size: 13vh;
         }
-
-        h2, p, span {
+        
+        main h2,
+        main p,
+        main span {
             color: var(--main-fore-color);
             text-transform: uppercase;
         }
@@ -175,6 +202,34 @@
             animation: hack-animation .3s ease-in-out infinite alternate;
         }
 
+        @media screen and (orientation: portrait) {
+            div {
+                visibility: visible;
+            }
+
+            div img {
+                animation: rotate-animation 1.5s ease-in-out infinite alternate;
+            }
+        }
+
+        @keyframes breath-animation {
+            from {
+                transform: scale(.9);
+            }
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes rotate-animation {
+            from {
+                transform: rotate(45deg);
+            }
+            to {
+                transform: rotate(-45deg);
+            }
+        }
+
         @keyframes hack-animation {
             to {
                 filter: opacity(.5);
@@ -184,20 +239,6 @@
         @keyframes error-animation {
             to {
                 filter: saturate(200%);
-            }
-        }
-
-        @media screen and (orientation: portrait) {
-            body {
-                background-image: url('./assets/img/rotate.png');
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: 30vw;
-                background-color: black;
-            }
-
-            body > * {
-                display: none;
             }
         }
         
@@ -267,7 +308,7 @@
 
 
         initLanguage();
-        setFullScreen();
+        //setFullScreen();
         playAudioEffect();
         addSwitchOnClick();
         setHackMode();
