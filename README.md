@@ -1,24 +1,43 @@
-![logo](https://github.com/user-attachments/assets/b9e64fdb-c1bc-424a-8e7d-35eff9b24e02)
+<div align="center">
+    <br>
+    <img src="https://github.com/TheRake66/Payday-2-Clock/blob/main/assets/images/logo.png" alt="Payday-2-Clock" width=250>
+    <br>
+    <br>
+    <a href="https://payday-2-clock.com" target="_blank">
+        <b>• View online version •</b>
+    </a>
+    <br>
+    <br>
+    <img src="https://img.shields.io/badge/License-NonCommercial-red" alt="License: Non-Commercial">
+    <img src="https://img.shields.io/github/stars/TheRake66/Payday-2-Clock"  alt="GitHub stars">
+    <br>
+    <br>
+</div>
 
 # Payday 2 - Clock
 
  Clock inspired by the screens of hackbox in the game Payday 2.
 
- Online version : https://payday-2-clock.com/
-
-## Preview
+## Preview screenshots
 
  *Hack mode :*
 
- ![20241205_004540_0672](https://github.com/user-attachments/assets/4bc0d0f3-80d0-42fc-8934-2a6c4f905c74)
+ ![Hack mode](https://github.com/TheRake66/Payday-2-Clock/blob/main/resources/20241205_004540_0672.png)
 
  *Error mode :*
 
- ![20241205_004555_0800](https://github.com/user-attachments/assets/60788749-7609-4f4d-b618-8ce61bb1fdd2)
+ ![Error mode](https://github.com/TheRake66/Payday-2-Clock/blob/main/resources/20241205_004555_0800.png)
 
+## How to use?
 
  You can change mode by clicking anywhere on the window.
 
  You can also change language by hovering over the gray "OVKL ToolSys 2.0" bar at the top.
 
  Have fun! 😉
+
+## License and Usage Restrictions
+
+ This project is licensed under a custom license that **prohibits commercial use**.
+
+ For more details, see the [LICENSE](./LICENSE) file.
