@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-EN">
 
     <head>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="./assets/img/logo.ico"/>
-        <title>...</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="author" content="Thibault BUSTOS (alias TheRake66)">
+        <meta name="keywords" content="Payday 2, Clock, Raspberry Pi">
+
+        <meta property="og:title" content="Payday 2 - Clock">
+        <meta property="og:description" content="Clock inspired by the screens of hackbox in the game Payday 2.">
+        <meta property="og:image" content="https://payday-2-clock.com/assets/images/preview.png">
+        <meta property="og:url" content="https://payday-2-clock.com">
+        <meta property="og:type" content="website">    
+
+        <meta name="twitter:title" content="Payday 2 - Clock">
+        <meta name="twitter:description" content="Clock inspired by the screens of hackbox in the game Payday 2.">
+        <meta name="twitter:image" content="https://payday-2-clock.com/assets/images/preview.png">
+        <meta property="twitter:url" content="https://payday-2-clock.com">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="twitter:domain" content="payday-2-clock.com">
+
+        <link rel="stylesheet" href="/sources/styles/style.css">
+        <link rel="icon" href="/assets/images/logo.ico" type="image/x-icon">
+        <title>Payday 2 - Clock</title>
+        <meta name="description" content="Clock inspired by the screens of hackbox in the game Payday 2.">
+
     </head>
 
     <body id="screen">
@@ -13,28 +35,28 @@
         <audio id="effect" preload="auto" loop></audio>
 
         <div>
-            <img src="./assets/img/rotate.png" alt="Rotate your phone">
+            <img src="/assets/images/rotate.png" alt="Rotate your phone">
         </div>
         
         <header>
             <h1>OVKL ToolSys 2.0</h1>
             <a href="?language=french">
-                <img src="./assets/img/fr.png" alt="French">
+                <img src="/assets/images/fr.png" alt="French">
             </a>
             <a href="?language=english">
-                <img src="./assets/img/gb.png" alt="English">
+                <img src="/assets/images/gb.png" alt="English">
             </a>
             <a href="?language=spanish">
-                <img src="./assets/img/es.png" alt="Spanish">
+                <img src="/assets/images/es.png" alt="Spanish">
             </a>
             <a href="?language=german">
-                <img src="./assets/img/de.png" alt="German">
+                <img src="/assets/images/de.png" alt="German">
             </a>
             <a href="?language=italian">
-                <img src="./assets/img/it.png" alt="Italian">
+                <img src="/assets/images/it.png" alt="Italian">
             </a>
             <a href="https://github.com/TheRake66/Payday-2-Clock" target="_blank">
-                <img src="./assets/img/github.png" alt="GitHub">
+                <img src="/assets/images/github.png" alt="GitHub">
             </a>
         </header>
 
@@ -47,406 +69,6 @@
 
     </body>
 
-    <style>
-
-        * {
-            box-sizing: border-box;
-            user-select: none;
-            margin: 0;
-            padding: 0;
-            font-family: 'DINEngschrift';
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        html, body {
-            overflow: hidden;
-        }
-
-        body {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        div {
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
-            z-index: 9999;
-            background-color: black;
-            display: flex;
-            visibility: hidden;
-        }
-
-        div img {
-            margin: auto;
-            width: 30vw;
-        }
-
-        header {
-            background-color: var(--top-background-color);
-            padding: 1vh 1.5vh;
-            display: flex;
-            align-items: center;
-        }
-
-        header:hover img {
-            opacity: 1;
-        }
-
-        header h1 {
-            color: var(--top-fore-color);
-            font-size: 6vh;
-            margin-right: auto;
-        }
-
-        header a {
-            display: flex;
-            text-decoration: none;
-        }
-
-        header img {
-            width: 6vh;
-            height: 6vh;
-            border-radius: 100%;
-            margin-left: 2vh;
-            opacity: 0;
-            transition: all .2s ease-in-out;
-        }
-
-        header img:hover {
-            filter: brightness(80%);
-            animation: breath-animation .5s ease-in-out infinite alternate;
-        }
-
-        main {
-            background-color: var(--main-background-color);
-            padding: 8vh 16vh;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        main h2 {
-            font-size: 13vh;
-        }
-
-        main progress {
-            margin: 4vh 0;
-            margin-top: 2vh;
-            width: 100%;
-            height: 18vh;
-            appearance: none;
-            -webkit-appearance: none;
-        }
-        
-        main progress::-webkit-progress-bar {
-            background-color: var(--progress-background-color);
-            padding: 1.25vh;
-        }
-
-        main progress::-webkit-progress-value {
-            background-color: var(--progress-value-color);
-        }
-
-        main p {
-            font-size: 9vh;
-        }
-
-        main span {
-            font-size: 13vh;
-        }
-        
-        main h2,
-        main p,
-        main span {
-            color: var(--main-fore-color);
-            text-transform: uppercase;
-        }
-
-        .error {
-            --top-background-color: #B40304;
-            --top-fore-color: #000000;
-
-            --main-background-color: #450505;
-            --main-fore-color: #7D0404;
-            
-            --progress-background-color: #680606;
-            --progress-value-color: #A50504;
-
-            animation: error-animation .5s ease-in-out infinite alternate;
-        }
-
-        .error h2 {
-            animation: none;
-        }
-
-        .hack {
-            --top-background-color: #b6b6b6;
-            --top-fore-color: #000000;
-
-            --main-background-color: #39638D;
-            --main-fore-color: #C6B123;
-            
-            --progress-background-color: #2B5279;
-            --progress-value-color: #C6B123;
-
-            animation: none;
-        }
-
-        .hack h2 {
-            animation: hack-animation .3s ease-in-out infinite alternate;
-        }
-
-        @media screen and (orientation: portrait) {
-            div {
-                visibility: visible;
-            }
-
-            div img {
-                animation: rotate-animation 1.5s ease-in-out infinite alternate;
-            }
-        }
-
-        @keyframes breath-animation {
-            from {
-                transform: scale(.9);
-            }
-            to {
-                transform: scale(1.1);
-            }
-        }
-
-        @keyframes rotate-animation {
-            from {
-                transform: rotate(45deg);
-            }
-            to {
-                transform: rotate(-45deg);
-            }
-        }
-
-        @keyframes hack-animation {
-            to {
-                filter: opacity(.5);
-            }
-        }
-
-        @keyframes error-animation {
-            to {
-                filter: saturate(200%);
-            }
-        }
-        
-        @font-face {
-            font-family: 'DINEngschrift';
-            src: url('./assets/font/DINEngschrift.ttf') format('truetype');
-        }
-
-    </style>
-
-    <script>
-
-        const screenElement = document.getElementById('screen');
-        const effectElement = document.getElementById('effect');
-        const switchElement = document.getElementById('switch');
-        const titleElement = document.getElementById('title');
-        const percentElement = document.getElementById('percent');
-        const estimatedElement = document.getElementById('estimated');
-        const clockElement = document.getElementById('clock');
-
-        let mainClockThread = null;
-        let defaultLanguage = 'english';
-        let currentLanguage = null;
-        let languagePack = {
-            french: {
-                htmlLang: 'fr-FR',
-                tabTitle: 'Horloge',
-                messageHack: 'Journée en cours',
-                messageError: 'Erreur',
-                estimatedTime: 'Temps actuel estimé',
-                dayFirst: true
-            },
-            english: {
-                htmlLang: 'en-EN',
-                tabTitle: 'Clock',
-                messageHack: 'Day in progress',
-                messageError: 'Error',
-                estimatedTime: 'Estimated current time',
-                dayFirst: false
-            },
-            spanish: {
-                htmlLang: 'sp-SP',
-                tabTitle: 'Reloj',
-                messageHack: 'Día en progreso',
-                messageError: 'Error',
-                estimatedTime: 'Hora actual estimada',
-                dayFirst: true
-            },
-            german: {
-                htmlLang: 'de-DE',
-                tabTitle: 'Uhr',
-                messageHack: 'Tag im Gange',
-                messageError: 'Fehler',
-                estimatedTime: 'Geschätzte aktuelle Zeit',
-                dayFirst: true
-            },
-            italian: {
-                htmlLang: 'it-IT',
-                tabTitle: 'Orologio',
-                messageHack: 'Giornata in corso',
-                messageError: 'Errore',
-                estimatedTime: 'Ora corrente stimata',
-                dayFirst: true
-            }
-        };
-
-
-
-        initLanguage();
-        setFullScreen();
-        playAudioEffect();
-        addSwitchOnClick();
-        setHackMode();
-        runMainThread();
-
-
-
-        function runMainThread() {
-            refreshClock();
-            mainClockThread = setInterval(() => {
-                refreshClock();
-            }, 1000);
-        }
-
-        function stopMainThread() {
-            clearInterval(mainClockThread);
-            mainClockThread = null;
-        }
-
-        function isMainThreadRunning() {
-            return mainClockThread !== null;
-        }
-
-        function playAudioEffect() {
-            waitUserGesture(
-                effectElement, 
-                effectElement.play, 
-                () => !effectElement.paused);
-        }
-
-        function setFullScreen() {
-            let element = document.documentElement;
-            waitUserGesture(
-                element, 
-                element.requestFullscreen, 
-                () => document.fullscreenElement);
-        }
-        
-        function addSwitchOnClick() {
-            switchElement.onclick = () => {
-                if (isMainThreadRunning()) {
-                    setErrorMode();
-                    stopMainThread();
-                } else {
-                    setHackMode();
-                    runMainThread();
-                }
-                playAudioEffect();
-            };
-        }
-
-        function initLanguage() {
-            let urlParameters = new URLSearchParams(window.location.search);
-            let languageCode = urlParameters.get('language');
-            currentLanguage = languagePack[
-                languageCode && languageCode in languagePack ?
-                languageCode : 
-                defaultLanguage];
-
-            document.title = 'Payday 2 - ' + currentLanguage.tabTitle;
-            document.documentElement.lang = currentLanguage.htmlLang;
-            estimated.innerText = currentLanguage.estimatedTime;
-        }
-
-        function setHackMode() {
-            screenElement.className = 'hack';
-            titleElement.innerText = currentLanguage.messageHack + '...';
-            clockElement.innerText = '...';
-            effectElement.src = "./assets/sound/hack.mp3";
-        }
-        
-        function setErrorMode() {
-            screenElement.className = 'error';
-            titleElement.innerText = '// ' + currentLanguage.messageError + ' //';
-            clockElement.innerText = '// ' + currentLanguage.messageError + ' //';
-            effectElement.src = "./assets/sound/error.mp3";
-        }
-
-        function refreshClock() {
-            percentElement.value = getDayPercent();
-            clockElement.innerText = getClockFormat();
-        }
-
-        function getClockFormat() {
-            let currentDate = new Date();
-
-            let currentDay = currentDate.getDate();
-            let currentMonth = currentDate.getMonth() + 1;
-            let currentYear = currentDate.getFullYear();
-
-            let currentHours = currentDate.getHours();
-            let currentMinutes = currentDate.getMinutes();
-            let currentSeconds = currentDate.getSeconds();
-
-            var dateFormat = (currentLanguage.dayFirst ?
-                padToTwo(currentDay) + '/' + padToTwo(currentMonth) :
-                padToTwo(currentMonth) + '/' + padToTwo(currentDay))
-                + '/' + currentYear;
-
-            var timeFormat = padToTwo(currentHours) + ':' + padToTwo(currentMinutes) + ':' + padToTwo(currentSeconds);
-
-            return dateFormat + ' - ' + timeFormat;
-        }
-
-        function getDayPercent() {
-            let currentDate = new Date();
-
-            let currentHours = currentDate.getHours();
-            let currentMinutes = currentDate.getMinutes();
-            let currentSeconds = currentDate.getSeconds();
-
-            let currentStamp = currentHours * 3600 + currentMinutes * 60 + currentSeconds;
-            let maxDayStamp = 24 * 60 * 60;
-
-            let percent = (currentStamp / maxDayStamp) * 100;
-
-            return percent.toFixed(2);
-        }
-
-        async function waitUserGesture(element, action, condition) {
-            while (true) {
-                action.call(element).catch(_ => {});
-                if (condition()) {
-                    console.clear();
-                    break;
-                }
-                await getSleepPromise();
-            }
-        } 
-
-        function padToTwo(number) {
-            return number.toString().padStart(2, '0');
-        }
-        
-        function getSleepPromise(time = 100) {
-            return new Promise(r => setTimeout(r, time));
-        }
-
-    </script>
+    <script type="text/javascript" src="/sources/scripts/script.js"></script>
 
 </html>

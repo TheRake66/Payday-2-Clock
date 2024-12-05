@@ -1,10 +1,10 @@
 ![logo](https://github.com/user-attachments/assets/b9e64fdb-c1bc-424a-8e7d-35eff9b24e02)
 
-# Payday 2 Clock
+# Payday 2 - Clock
 
  Clock inspired by the screens of hackbox in the game Payday 2.
 
- Online version : https://www.payday-2-clock.com/
+ Online version : https://payday-2-clock.com/
 
 ## Preview
 

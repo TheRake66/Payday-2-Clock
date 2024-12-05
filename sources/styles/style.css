@@ -1,0 +1,197 @@
+* {
+    box-sizing: border-box;
+    user-select: none;
+    margin: 0;
+    padding: 0;
+    font-family: 'DINEngschrift';
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    overflow: hidden;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+div {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background-color: black;
+    display: flex;
+    visibility: hidden;
+}
+
+div img {
+    margin: auto;
+    width: 30vw;
+}
+
+header {
+    background-color: var(--top-background-color);
+    padding: 1vh 1.5vh;
+    display: flex;
+    align-items: center;
+}
+
+header:hover img {
+    opacity: 1;
+}
+
+header h1 {
+    color: var(--top-fore-color);
+    font-size: 6vh;
+    margin-right: auto;
+}
+
+header a {
+    display: flex;
+    text-decoration: none;
+}
+
+header img {
+    width: 6vh;
+    height: 6vh;
+    border-radius: 100%;
+    margin-left: 2vh;
+    opacity: 0;
+    transition: all .2s ease-in-out;
+}
+
+header img:hover {
+    filter: brightness(80%);
+    animation: breath-animation .5s ease-in-out infinite alternate;
+}
+
+main {
+    background-color: var(--main-background-color);
+    padding: 8vh 16vh;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main h2 {
+    font-size: 13vh;
+}
+
+main progress {
+    margin: 4vh 0;
+    margin-top: 2vh;
+    width: 100%;
+    height: 18vh;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+main progress::-webkit-progress-bar {
+    background-color: var(--progress-background-color);
+    padding: 1.25vh;
+}
+
+main progress::-webkit-progress-value {
+    background-color: var(--progress-value-color);
+}
+
+main p {
+    font-size: 9vh;
+}
+
+main span {
+    font-size: 13vh;
+}
+
+main h2,
+main p,
+main span {
+    color: var(--main-fore-color);
+    text-transform: uppercase;
+}
+
+.error {
+    --top-background-color: #B40304;
+    --top-fore-color: #000000;
+
+    --main-background-color: #450505;
+    --main-fore-color: #7D0404;
+    
+    --progress-background-color: #680606;
+    --progress-value-color: #A50504;
+
+    animation: error-animation .5s ease-in-out infinite alternate;
+}
+
+.error h2 {
+    animation: none;
+}
+
+.hack {
+    --top-background-color: #b6b6b6;
+    --top-fore-color: #000000;
+
+    --main-background-color: #39638D;
+    --main-fore-color: #C6B123;
+    
+    --progress-background-color: #2B5279;
+    --progress-value-color: #C6B123;
+
+    animation: none;
+}
+
+.hack h2 {
+    animation: hack-animation .3s ease-in-out infinite alternate;
+}
+
+@media screen and (orientation: portrait) {
+    div {
+        visibility: visible;
+    }
+
+    div img {
+        animation: rotate-animation 1.5s ease-in-out infinite alternate;
+    }
+}
+
+@keyframes breath-animation {
+    from {
+        transform: scale(.9);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes rotate-animation {
+    from {
+        transform: rotate(45deg);
+    }
+    to {
+        transform: rotate(-45deg);
+    }
+}
+
+@keyframes hack-animation {
+    to {
+        filter: opacity(.5);
+    }
+}
+
+@keyframes error-animation {
+    to {
+        filter: saturate(200%);
+    }
+}
+
+@font-face {
+    font-family: 'DINEngschrift';
+    src: url('/assets/fonts/DINEngschrift.ttf') format('truetype');
+}
