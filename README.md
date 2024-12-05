@@ -1,6 +1,6 @@
 <div align="center">
     <br>
-    <img src="https://github.com/TheRake66/Payday-2-Clock/blob/main/assets/images/logo.png" alt="Payday-2-Clock" width=250>
+    <img src="./assets/images/logo.png" alt="Payday-2-Clock" width=250>
     <br>
     <br>
     <a href="https://payday-2-clock.com" target="_blank">
@@ -22,11 +22,11 @@
 
  *Hack mode :*
 
- ![Hack mode](https://github.com/TheRake66/Payday-2-Clock/blob/main/resources/20241205_004540_0672.png)
+ ![Hack mode](./resources/20241205_004540_0672.png)
 
  *Error mode :*
 
- ![Error mode](https://github.com/TheRake66/Payday-2-Clock/blob/main/resources/20241205_004555_0800.png)
+ ![Error mode](./resources/20241205_004555_0800.png)
 
 ## How to use?
 
