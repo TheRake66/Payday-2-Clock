@@ -332,32 +332,19 @@
             return mainClockThread !== null;
         }
 
-        async function playAudioEffect() {
-            while (true) {
-                try {
-                    effectElement.play().catch(_ => {});
-                    break;
-                } catch {
-                    await getSleepPromise();
-                }
-            }
+        function playAudioEffect() {
+            waitUserGesture(
+                effectElement, 
+                effectElement.play, 
+                () => !effectElement.paused);
         }
 
-        async function setFullScreen() {
+        function setFullScreen() {
             let element = document.documentElement;
-            let requestMethod = 
-                element.requestFullscreen || 
-                element.mozRequestFullScreen || 
-                element.webkitRequestFullscreen || 
-                element.msRequestFullscreen;
-            while (true) {
-                requestMethod?.call(element).catch(_ => {});
-                if (document.fullscreenElement) {
-                    console.clear();
-                    break;
-                }
-                await getSleepPromise();
-            }
+            waitUserGesture(
+                element, 
+                element.requestFullscreen, 
+                () => document.fullscreenElement);
         }
         
         function addSwitchOnClick() {
@@ -440,6 +427,17 @@
 
             return percent.toFixed(2);
         }
+
+        async function waitUserGesture(element, action, condition) {
+            while (true) {
+                action.call(element).catch(_ => {});
+                if (condition()) {
+                    console.clear();
+                    break;
+                }
+                await getSleepPromise();
+            }
+        } 
 
         function padToTwo(number) {
             return number.toString().padStart(2, '0');
