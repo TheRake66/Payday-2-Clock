@@ -56,9 +56,9 @@ let languagePack = {
 
 initLanguage();
 setFullScreen();
-playAudioEffect();
 addSwitchOnClick();
 setHackMode();
+playAudioEffect();
 runMainThread();
 
 
