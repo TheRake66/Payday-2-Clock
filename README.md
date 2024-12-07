@@ -44,6 +44,8 @@
 
  In Chrome on Android, click on the three dots on the top right, then on "Add to Home Screen".
 
+ For other browsers... It's up to you to find the option, I have no idea. 🤷‍♂️
+
 ## License and Usage Restrictions
 
  This project is licensed under a custom license that **prohibits commercial use**.
