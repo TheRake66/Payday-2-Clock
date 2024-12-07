@@ -25,6 +25,7 @@ const urlsToCache = [
 
 
 self.addEventListener('install', event => {
+    self.skipWaiting();
     event.waitUntil(caches.open(CACHE_NAME).then(cache => {
         console.log('Caching app shell...');
         return cache.addAll(urlsToCache).catch(err => {
