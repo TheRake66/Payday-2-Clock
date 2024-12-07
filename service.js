@@ -16,6 +16,7 @@ const urlsToCache = [
     '/assets/images/fr.png',
     '/assets/images/gb.png',
     '/assets/images/es.png',
+    '/assets/images/de.png',
     '/assets/images/it.png',
     '/assets/images/github.png',
 
