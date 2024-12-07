@@ -1,6 +1,6 @@
 <div align="center">
     <br>
-    <img src="./assets/images/logo.png" alt="Payday-2-Clock" width=250>
+    <img src="./assets/images/logo.png" alt="Payday 2 Clock" width=250>
     <br>
     <br>
     <a href="https://payday-2-clock.com" target="_blank">
@@ -14,7 +14,7 @@
     <br>
 </div>
 
-# Payday 2 - Clock
+# Payday 2 Clock
 
  Clock inspired by the screens of hackbox in the game Payday 2.
 

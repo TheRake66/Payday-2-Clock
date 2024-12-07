@@ -115,7 +115,7 @@ function initLanguage() {
         languageCode : 
         defaultLanguage];
 
-    document.title = `Payday 2 - ${currentLanguage.tabTitle}`;
+    document.title = `Payday 2 ${currentLanguage.tabTitle}`;
     document.documentElement.lang = currentLanguage.htmlLang;
     estimated.innerText = currentLanguage.estimatedTime;
 }

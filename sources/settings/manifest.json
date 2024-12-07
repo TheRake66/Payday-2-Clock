@@ -1,0 +1,23 @@
+{
+    "name": "Payday 2 Clock",
+    "short_name": "PD2C",
+    "description": "Clock inspired by the screens of hackbox in the game Payday 2.",
+    "scope": "/",
+    "start_url": "/index.html",
+    "display": "fullscreen",
+    "orientation": "landscape",
+    "background_color": "#404040",
+    "theme_color": "#404040",
+    "icons": [
+        {
+            "src": "/assets/images/pwa-small.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/images/pwa-big.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
