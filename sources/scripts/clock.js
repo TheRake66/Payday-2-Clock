@@ -179,7 +179,6 @@ async function waitUserGesture(element, action, condition) {
     while (true) {
         action.call(element).catch(_ => {});
         if (condition()) {
-            console.clear();
             break;
         }
         await getSleepPromise();
