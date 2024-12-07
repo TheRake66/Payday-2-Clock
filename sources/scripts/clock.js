@@ -6,12 +6,10 @@ const percentElement = document.getElementById('percent');
 const estimatedElement = document.getElementById('estimated');
 const clockElement = document.getElementById('clock');
 
-let mainClockThread = null;
-let defaultLanguage = 'english';
-let currentLanguage = null;
-let languagePack = {
+const defaultLanguage = 'english';
+const languagePack = {
     french: {
-        htmlLang: 'fr-FR',
+        htmlLang: 'fr',
         tabTitle: 'Horloge',
         messageHack: 'Journée en cours',
         messageError: 'Erreur',
@@ -19,7 +17,7 @@ let languagePack = {
         dayFirst: true
     },
     english: {
-        htmlLang: 'en-EN',
+        htmlLang: 'en',
         tabTitle: 'Clock',
         messageHack: 'Day in progress',
         messageError: 'Error',
@@ -27,7 +25,7 @@ let languagePack = {
         dayFirst: false
     },
     spanish: {
-        htmlLang: 'sp-SP',
+        htmlLang: 'es',
         tabTitle: 'Reloj',
         messageHack: 'Día en progreso',
         messageError: 'Error',
@@ -35,7 +33,7 @@ let languagePack = {
         dayFirst: true
     },
     german: {
-        htmlLang: 'de-DE',
+        htmlLang: 'de',
         tabTitle: 'Uhr',
         messageHack: 'Tag im Gange',
         messageError: 'Fehler',
@@ -43,7 +41,7 @@ let languagePack = {
         dayFirst: true
     },
     italian: {
-        htmlLang: 'it-IT',
+        htmlLang: 'it',
         tabTitle: 'Orologio',
         messageHack: 'Giornata in corso',
         messageError: 'Errore',
@@ -51,6 +49,9 @@ let languagePack = {
         dayFirst: true
     }
 };
+
+let mainClockThread = null;
+let currentLanguage = null;
 
 
 
@@ -87,7 +88,7 @@ function playAudioEffect() {
 }
 
 function setFullScreen() {
-    let element = document.documentElement;
+    const element = document.documentElement;
     waitUserGesture(
         element, 
         element.requestFullscreen, 
@@ -108,12 +109,10 @@ function addSwitchOnClick() {
 }
 
 function initLanguage() {
-    let urlParameters = new URLSearchParams(window.location.search);
-    let languageCode = urlParameters.get('language');
+    const urlParameters = new URLSearchParams(window.location.search);
+    const languageCode = urlParameters.get('language');
     currentLanguage = languagePack[
-        languageCode && languageCode in languagePack ?
-        languageCode : 
-        defaultLanguage];
+        languageCode && languageCode in languagePack ? languageCode : defaultLanguage];
 
     document.title = `Payday 2 ${currentLanguage.tabTitle}`;
     document.documentElement.lang = currentLanguage.htmlLang;
@@ -140,37 +139,37 @@ function refreshClock() {
 }
 
 function getClockFormat() {
-    let currentDate = new Date();
+    const currentDate = new Date();
 
-    let currentDay = currentDate.getDate();
-    let currentMonth = currentDate.getMonth() + 1;
-    let currentYear = currentDate.getFullYear();
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentYear = currentDate.getFullYear();
 
-    let currentHours = currentDate.getHours();
-    let currentMinutes = currentDate.getMinutes();
-    let currentSeconds = currentDate.getSeconds();
+    const currentHours = currentDate.getHours();
+    const currentMinutes = currentDate.getMinutes();
+    const currentSeconds = currentDate.getSeconds();
 
-    var dateFormat = (currentLanguage.dayFirst ?
+    const dateFormat = (currentLanguage.dayFirst ?
         `${padToTwo(currentDay)}/${padToTwo(currentMonth)}` :
         `${padToTwo(currentMonth)}/${padToTwo(currentDay)}`)
         + `/${currentYear}`;
 
-    var timeFormat = `${padToTwo(currentHours)}:${padToTwo(currentMinutes)}:${padToTwo(currentSeconds)}`;
+    const timeFormat = `${padToTwo(currentHours)}:${padToTwo(currentMinutes)}:${padToTwo(currentSeconds)}`;
 
     return `${dateFormat} - ${timeFormat}`;
 }
 
 function getDayPercent() {
-    let currentDate = new Date();
+    const currentDate = new Date();
 
-    let currentHours = currentDate.getHours();
-    let currentMinutes = currentDate.getMinutes();
-    let currentSeconds = currentDate.getSeconds();
+    const currentHours = currentDate.getHours();
+    const currentMinutes = currentDate.getMinutes();
+    const currentSeconds = currentDate.getSeconds();
 
-    let currentStamp = currentHours * 3600 + currentMinutes * 60 + currentSeconds;
-    let maxDayStamp = 24 * 60 * 60;
+    const currentStamp = currentHours * 3600 + currentMinutes * 60 + currentSeconds;
+    const maxDayStamp = 24 * 60 * 60;
 
-    let percent = (currentStamp / maxDayStamp) * 100;
+    const percent = (currentStamp / maxDayStamp) * 100;
 
     return percent.toFixed(2);
 }
@@ -178,9 +177,7 @@ function getDayPercent() {
 async function waitUserGesture(element, action, condition) {
     while (true) {
         action.call(element).catch(_ => {});
-        if (condition()) {
-            break;
-        }
+        if (condition()) break;
         await getSleepPromise();
     }
 } 
