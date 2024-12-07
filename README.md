@@ -16,7 +16,7 @@
 
 # Payday 2 Clock
 
- Clock inspired by the screens of hackbox in the game Payday 2.
+ Clock inspired by hackbox screens in the game Payday 2.
 
 ## Preview screenshots
 
@@ -30,11 +30,19 @@
 
 ## How to use?
 
- You can change mode by clicking anywhere on the window.
+ You can change the mode by clicking anywhere on the window.
 
- You can also change language by hovering over the gray "OVKL ToolSys 2.0" bar at the top.
+ You can also change the language by hovering over the gray "OVKL ToolSys 2.0" bar at the top.
 
  Have fun! 😉
+
+## How to install?
+
+ You can now install an offline version of the clock via a PWA (Progressive Web App).
+
+ In Chrome on PC, click on the top right of the URL bar on "Install Payday 2 Clock".
+
+ In Chrome on Android, click on the three dots on the top right, then on "Add to Home Screen".
 
 ## License and Usage Restrictions
 
