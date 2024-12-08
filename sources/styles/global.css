@@ -41,7 +41,7 @@ header {
     align-items: center;
 }
 
-header:hover img {
+header:hover a {
     opacity: 1;
 }
 
@@ -54,20 +54,21 @@ header h1 {
 header a {
     display: flex;
     text-decoration: none;
+    margin-left: 2vh;
+    border-radius: 100%;
+    overflow: hidden;
+    opacity: 0;
+    transition: all .2s ease-in-out;
+}
+
+header a:hover {
+    filter: brightness(80%);
+    animation: breath-animation .5s ease-in-out infinite alternate;
 }
 
 header img {
     width: 6vh;
     height: 6vh;
-    border-radius: 100%;
-    margin-left: 2vh;
-    opacity: 0;
-    transition: all .2s ease-in-out;
-}
-
-header img:hover {
-    filter: brightness(80%);
-    animation: breath-animation .5s ease-in-out infinite alternate;
 }
 
 main {
