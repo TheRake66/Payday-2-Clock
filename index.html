@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html lang="en-EN">
+<html lang="en">
 
     <head>
 
+        <!-- Paramètres du navigateur. -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+        <!--Informations pour le référencement. -->
         <meta name="author" content="Thibault BUSTOS (alias TheRake66)">
         <meta name="keywords" content="Payday 2, Clock, Raspberry Pi, PD2C">
         <meta name="description" content="Clock inspired by the screens of hackbox in the game Payday 2.">
 
+        <!-- Paramètres des cartes Open Graph et Meta. -->
         <meta property="og:title" content="Payday 2 Clock">
         <meta property="og:description" content="Clock inspired by the screens of hackbox in the game Payday 2.">
         <meta property="og:image" content="https://payday-2-clock.com/assets/images/preview.png">
         <meta property="og:url" content="https://payday-2-clock.com">
-        <meta property="og:type" content="website">    
+        <meta property="og:type" content="website">
 
+        <!-- Paramètres des cartes Twitter. -->
         <meta name="twitter:title" content="Payday 2 Clock">
         <meta name="twitter:description" content="Clock inspired by the screens of hackbox in the game Payday 2.">
         <meta name="twitter:image" content="https://payday-2-clock.com/assets/images/preview.png">
@@ -24,7 +28,10 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta property="twitter:domain" content="payday-2-clock.com">
 
+        <!-- Définition de la PWA (Progressive Web App). -->
         <link rel="manifest" href="/sources/settings/manifest.json">
+
+        <!-- Paramètres de l'apparence de l'application. -->
         <link rel="stylesheet" href="/sources/styles/global.css">
         <link rel="icon" href="/assets/images/logo.ico" type="image/x-icon">
         <title>Payday 2 Clock</title>
@@ -32,6 +39,7 @@
 
     </head>
 
+    <!-- Création de l'interface de l'application. -->
     <body id="screen">
 
         <audio id="effect" preload="auto" loop></audio>
@@ -71,8 +79,7 @@
 
     </body>
 
-    <script type="text/javascript" src="/sources/scripts/security.js"></script>
-    <script type="text/javascript" src="/sources/scripts/register.js"></script>
-    <script type="text/javascript" src="/sources/scripts/clock.js"></script>
+    <!-- Importation du script JavaScript. -->
+    <script type="module" src="/sources/scripts/global.js"></script>
 
 </html>
