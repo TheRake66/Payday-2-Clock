@@ -35,7 +35,7 @@ const urlsToCache = [
 ];
 
 /**
- * @event install Créer le fichier de cache et ajouter les fichiers.
+ * @event install Crée le fichier de cache et ajoute tous les fichiers.
  */
 self.addEventListener('install', event => {
     self.skipWaiting();
