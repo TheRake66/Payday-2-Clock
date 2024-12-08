@@ -11,12 +11,12 @@ export default class Language {
     /**
      * @type {String} La clé du pack de langue par défaut.
      */
-    static defaultLanguage = 'english';
+    defaultLanguage = 'english';
 
     /**
      * @type {Object} Les packs de langues disponibles.
      */
-    static languagePacks = {
+    languagePacks = {
         french: {
             htmlLang: 'fr',
             tabTitle: 'Horloge',
@@ -72,9 +72,9 @@ export default class Language {
     loadPack() {
         const urlParameters = new URLSearchParams(window.location.search);
         const languageCode = urlParameters.get('language');
-        Language.currentPack = Language.languagePacks[
-            languageCode && languageCode in Language.languagePacks ? 
-                languageCode : Language.defaultLanguage];
+        Language.currentPack = this.languagePacks[
+            languageCode && languageCode in this.languagePacks ? 
+                languageCode : this.defaultLanguage];
     }
 
 }
