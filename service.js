@@ -1,7 +1,7 @@
 /**
  * @type {String} L'identifiant du fichier de cache.
  */
-const CACHE_NAME = 'pwa-cache-v9';
+const cacheName = 'pwa-cache-v9';
 
 /**
  * @type {Array} Liste des fichiers à mettre en cache.
@@ -39,7 +39,7 @@ const urlsToCache = [
  */
 self.addEventListener('install', event => {
     self.skipWaiting();
-    event.waitUntil(caches.open(CACHE_NAME)
+    event.waitUntil(caches.open(cacheName)
         .then(cache => cache.addAll(urlsToCache)));
 });
 
@@ -49,7 +49,7 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
     event.waitUntil(caches.keys().then(cacheNames => {
         return Promise.all(cacheNames
-                .filter(cache => cache !== CACHE_NAME)
+                .filter(cache => cache !== cacheName)
                 .map(cache => caches.delete(cache)));
     }));
 });
