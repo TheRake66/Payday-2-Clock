@@ -1,7 +1,7 @@
 /**
  * @type {String} L'identifiant du fichier de cache.
  */
-const cacheName = 'pwa-cache-v9';
+const cacheName = 'pwa-cache-v13';
 
 /**
  * @type {Array} Liste des fichiers à mettre en cache.
