@@ -38,26 +38,4 @@ export default class Library {
         return new Promise(r => setTimeout(r, time));
     }
 
-    /**
-     * Mets le site en plein écran.
-     */
-    static forceFullScreen() {
-        Library.forceUntilSuccess(
-            document.documentElement, 
-            document.documentElement.requestFullscreen, 
-            () => document.fullscreenElement);
-    }
-
-    /**
-     * Joue un fichier audio.
-     * 
-     * @param {HTMLElement} element L'élément audio à lire.
-     */
-    static forcePlayAudio(element) {
-        Library.forceUntilSuccess(
-            element, 
-            element.play, 
-            () => !element.paused);
-    }
-
 }

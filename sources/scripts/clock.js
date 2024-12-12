@@ -19,6 +19,11 @@ export default class Clock {
     effectElement = document.getElementById('effect');
 
     /**
+     * @type {HTMLElement} L'élément pour mettre en plein écran.
+     */
+    fullscreenElement = document.getElementById('fullscreen');
+
+    /**
      * @type {HTMLElement} L'élément permettant le passage du mode hack au mode error.
      */
     switchElement = document.getElementById('switch');
@@ -46,26 +51,32 @@ export default class Clock {
     /**
      * @type {Number} Le handle de la boucle principale d'actualisation.
      */
-    mainClockThread = null;
+    clockThreadHandle = null;
+
+    /**
+     * @type {Number} Le handle du délai pour cacher le curseur.
+     */
+    cursorDelayHandle = null;
 
     /**
      * Constructeur de la classe.
      */
     constructor() {
-        Library.forceFullScreen();
         this.initLanguage();
-        this.addSwitchOnClick();
+        this.addSwitchModeEvent();
+        this.addInactiveCursorEvent();
+        this.addFullScreenEvent();
         this.setHackMode();
         this.playAudioEffect();
-        this.runMainThread();
+        this.runClockThread();
     }
 
     /**
      * Lance la boucle principale d'actualisation.
      */
-    runMainThread() {
+    runClockThread() {
         this.refreshClock();
-        this.mainClockThread = setInterval(() => {
+        this.clockThreadHandle = setInterval(() => {
             this.refreshClock();
         }, 1000);
     }
@@ -73,9 +84,9 @@ export default class Clock {
     /**
      * Arrête la boucle principale d'actualisation.
      */
-    stopMainThread() {
-        clearInterval(this.mainClockThread);
-        this.mainClockThread = null;
+    stopClockThread() {
+        clearInterval(this.clockThreadHandle);
+        this.clockThreadHandle = null;
     }
     
     /**
@@ -83,8 +94,8 @@ export default class Clock {
      * 
      * @returns {Boolean} Si la boucle principale d'actualisation est lancée.
      */
-    isMainThreadRunning() {
-        return this.mainClockThread !== null;
+    isClockRunning() {
+        return this.clockThreadHandle !== null;
     }
     
     /**
@@ -101,23 +112,50 @@ export default class Clock {
      * Joue le son d'arrière-plan. 
      */
     playAudioEffect() {
-        Library.forcePlayAudio(this.effectElement);
+        Library.forceUntilSuccess(
+            this.effectElement, 
+            this.effectElement.play, 
+            () => !this.effectElement.paused);
     }
     
     /**
      * Ajoute l'événement qui permet de changer de mode.
      */
-    addSwitchOnClick() {
+    addSwitchModeEvent() {
         this.switchElement.onclick = () => {
-            if (this.isMainThreadRunning()) {
+            if (this.isClockRunning()) {
                 this.setErrorMode();
-                this.stopMainThread();
+                this.stopClockThread();
             } else {
                 this.setHackMode();
-                this.runMainThread();
+                this.runClockThread();
             }
             this.playAudioEffect();
-        };
+        }
+    }
+    
+    /**
+     * Ajoute l'événement qui permet de cacher la souris.
+     */
+    addInactiveCursorEvent() {
+        this.screenElement.onmousemove = () => {
+            this.screenElement.classList.remove('inactive');
+            clearTimeout(this.cursorDelayHandle);
+            this.cursorDelayHandle = setTimeout(() => {
+                this.screenElement.classList.add('inactive');
+            }, 2000);
+        }
+    }
+    
+    /**
+     * Ajoute l'événement qui permet de mettre en plein écran.
+     */
+    addFullScreenEvent() {
+        this.fullscreenElement.onclick = () => {
+            document.fullscreenElement ?
+                document.exitFullscreen() :
+                document.documentElement.requestFullscreen();
+        }
     }
     
     /**
@@ -125,7 +163,8 @@ export default class Clock {
      */
     setHackMode() {
         const pack = Language.currentPack;
-        this.screenElement.className = 'hack';
+        this.screenElement.classList.add('hack');
+        this.screenElement.classList.remove('error');
         this.titleElement.innerText = `${pack.messageHack}...`;
         this.clockElement.innerText = '...';
         this.effectElement.src = '/assets/sounds/hack.mp3';
@@ -136,7 +175,8 @@ export default class Clock {
      */
     setErrorMode() {
         const pack = Language.currentPack;
-        this.screenElement.className = 'error';
+        this.screenElement.classList.add('error');
+        this.screenElement.classList.remove('hack');
         this.titleElement.innerText = `// ${pack.messageError} //`;
         this.clockElement.innerText = `// ${pack.messageError} //`;
         this.effectElement.src = '/assets/sounds/error.mp3';

@@ -30,9 +30,11 @@
 
 ## How to use?
 
- You can change the mode by clicking anywhere on the window.
+ You can switch the mode by clicking anywhere on the window.
 
- You can also change the language by hovering over the gray "OVKL ToolSys 2.0" bar at the top.
+ You can change the language by hovering over the gray bar at the top.
+
+ You can go full screen by clicking on "OVKL ToolSys 2.0".
 
  Have fun! 😉
 
